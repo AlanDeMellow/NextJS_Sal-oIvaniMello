@@ -1,69 +1,114 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Header from "./components/Header";
 
 export default function Home() {
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>
-            To get started, edit the{" "}
-            <code className={styles.code}>page.tsx</code> file.
-          </h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+    <>
+      <Header />
+
+      <main
+        style={{
+          backgroundColor: "#f8eef2",
+          minHeight: "100vh",
+        }}
+      >
+        <section className="container py-5">
+          <div className="row align-items-center py-5">
+            <div className="col-md-6">
+              <p
+                className="text-uppercase mb-3"
+                style={{
+                  color: "#925b72",
+                  fontSize: "0.8rem",
+                  letterSpacing: "3px",
+                }}
+              >
+                Beleza & cuidado • Nova Bassano, RS
+              </p>
+
+              <h1
+                className="mb-4"
+                style={{
+                  fontSize: "4rem",
+                  lineHeight: "1.05",
+                  fontFamily: "Georgia, serif",
+                  fontWeight: 400,
+                  color: "#30252a",
+                }}
+              >
+                Seu cabelo.
+                <br />
+                Seu estilo.
+                <br />
+                <span style={{ color: "#9d657b" }}>
+                  Sua beleza.
+                </span>
+              </h1>
+
+              <p
+                className="mb-4"
+                style={{
+                  maxWidth: "500px",
+                  color: "#6c5e64",
+                  lineHeight: "1.8",
+                }}
+              >
+                Um espaço para cuidar de você e facilitar seus
+                agendamentos de forma simples e organizada.
+              </p>
+
+              <div className="d-flex gap-3 flex-wrap">
+                <a
+                  href="/login"
+                  className="btn px-4 py-2"
+                  style={{
+                    backgroundColor: "#8f536b",
+                    color: "#fff",
+                    borderRadius: "999px",
+                  }}
+                >
+                  Agendar horário
+                </a>
+
+                <a
+                  href="/login"
+                  className="btn px-4 py-2"
+                  style={{
+                    border: "1px solid #8f536b",
+                    color: "#8f536b",
+                    borderRadius: "999px",
+                  }}
+                >
+                  Login
+                </a>
+              </div>
+            </div>
+
+            <div className="col-md-6 mt-5 mt-md-0">
+              <div
+                className="d-flex align-items-center justify-content-center text-center p-4"
+                style={{
+                  minHeight: "420px",
+                  backgroundColor: "#efe0e5",
+                  borderRadius: "24px",
+                  border: "1px solid #e5d1d8",
+                  color: "#8f536b",
+                }}
+              >
+                <div>
+                  <i
+                    className="bi bi-camera"
+                    style={{ fontSize: "2rem" }}
+                  ></i>
+
+                  <p className="mt-3 mb-0">
+                    Aqui terá fotos de clientes
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+    </>
   );
 }
