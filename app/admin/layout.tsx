@@ -28,6 +28,11 @@ export default function AdminLayout({
 
     setAutenticado(true);
   }, [router]);
+
+  if (!autenticado) {
+    return null;
+  }
+
   const menu = [
     {
       nome: "Dashboard",
@@ -90,20 +95,24 @@ export default function AdminLayout({
         <div className="text-center mb-4">
           <div
             style={{
-              width: "90px",
-              height: "90px",
+              width: "120px",
+              height: "120px",
               margin: "0 auto 15px",
-              border: "1px solid #8f536b",
-              borderRadius: "50%",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontFamily: "Georgia, serif",
-              color: "#30252a",
-              fontSize: "1.6rem",
             }}
           >
-            IM
+            <img
+              src="/assets/logo.png"
+              alt="Ivani Mello Studio de Beleza"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
           </div>
 
           <p
@@ -143,6 +152,7 @@ export default function AdminLayout({
                   backgroundColor: ativo ? "#f1dfe6" : "transparent",
                   color: ativo ? "#8f536b" : "#5d5156",
                   fontWeight: ativo ? 600 : 400,
+                  textDecoration: "none",
                 }}
               >
                 <i
@@ -166,6 +176,7 @@ export default function AdminLayout({
             className="d-flex align-items-center gap-3 px-3 py-2"
             style={{
               color: "#8f536b",
+              textDecoration: "none",
             }}
           >
             <i className="bi bi-box-arrow-right"></i>
@@ -193,6 +204,7 @@ export default function AdminLayout({
               style={{
                 fontFamily: "Georgia, serif",
                 letterSpacing: "2px",
+                color: "#30252a",
               }}
             >
               IVANI MELLO

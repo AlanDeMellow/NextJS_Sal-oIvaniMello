@@ -82,22 +82,18 @@ export default function ClienteLayout({
       >
         <div className="text-center mb-4">
           <div
+            role="img"
+            aria-label="Ivani Mello Studio de Beleza"
             style={{
-              width: "80px",
-              height: "80px",
+              width: "150px",
+              height: "150px",
               margin: "0 auto 15px",
-              border: "1px solid #8f536b",
-              borderRadius: "50%",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontFamily: "Georgia, serif",
-              color: "#30252a",
-              fontSize: "1.5rem",
+              backgroundImage: "url('/assets/logo.png')",
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
-          >
-            IM
-          </div>
+          />
 
           <p
             className="mb-1"
@@ -136,10 +132,10 @@ export default function ClienteLayout({
                   backgroundColor: ativo ? "#f1dfe6" : "transparent",
                   color: ativo ? "#8f536b" : "#5d5156",
                   fontWeight: ativo ? 600 : 400,
+                  textDecoration: "none",
                 }}
               >
                 <i className={`bi ${item.icon}`}></i>
-
                 {item.nome}
               </Link>
             );
@@ -154,6 +150,7 @@ export default function ClienteLayout({
             className="d-flex align-items-center gap-3 px-3 py-3"
             style={{
               color: "#8f536b",
+              textDecoration: "none",
             }}
           >
             <i className="bi bi-box-arrow-right"></i>
@@ -175,6 +172,7 @@ export default function ClienteLayout({
             style={{
               fontFamily: "Georgia, serif",
               letterSpacing: "2px",
+              color: "#30252a",
             }}
           >
             IVANI MELLO STUDIO DE BELEZA
