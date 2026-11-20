@@ -2,11 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
-import {
-  getRole,
-  isAuthenticated,
-} from "./login/auth_service";
+import { useMemo, useState } from "react";
 
 type FotoPortfolio = {
   src: string;
@@ -15,13 +11,6 @@ type FotoPortfolio = {
 
 export default function HomePage() {
   const [menuAberto, setMenuAberto] = useState(false);
-  const [logado, setLogado] = useState(false);
-  const [role, setRole] = useState<string | null>(null);
-
-  useEffect(() => {
-    setLogado(isAuthenticated());
-    setRole(getRole());
-  }, []);
 
   const fotos: FotoPortfolio[] = useMemo(
     () => [
@@ -61,31 +50,14 @@ export default function HomePage() {
     []
   );
 
-  function rotaAgendamento() {
-    if (!logado) {
-      return "/login";
-    }
-
-    if (role === "ADMIN") {
-      return "/admin";
-    }
-
-    return "/cliente/agendar";
-  }
-
-  function rotaArea() {
-    if (role === "ADMIN") {
-      return "/admin";
-    }
-
-    return "/cliente";
-  }
+  const whatsappUrl =
+    "https://wa.me/5554996619663?text=Ol%C3%A1%2C%20Ivani!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os%20e%20hor%C3%A1rios.";
 
   return (
     <>
       <div className="portfolio-announcement">
         Seu momento de cuidado, em Nova Bassano
-        <span>Atendimento com agendamento</span>
+        <span>Atendimento com horário marcado</span>
       </div>
 
       <header className="portfolio-header">
@@ -142,30 +114,21 @@ export default function HomePage() {
         </nav>
 
         <div className="portfolio-header-actions">
-          <Link
+          <a
             className="portfolio-button portfolio-button-small"
-            href={rotaAgendamento()}
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Agendar horário
-          </Link>
+            Entrar em contato
+          </a>
 
-          {!logado ? (
-            <Link
-              className="portfolio-login-button"
-              href="/login"
-            >
-              Login
-            </Link>
-          ) : (
-            <Link
-              className="portfolio-login-button"
-              href={rotaArea()}
-            >
-              {role === "ADMIN"
-                ? "Painel"
-                : "Área do cliente"}
-            </Link>
-          )}
+          <Link
+            className="portfolio-login-button"
+            href="/login"
+          >
+            Login
+          </Link>
         </div>
       </header>
 
@@ -193,12 +156,14 @@ export default function HomePage() {
             </p>
 
             <div className="portfolio-hero-actions">
-              <Link
+              <a
                 className="portfolio-button"
-                href={rotaAgendamento()}
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Agendar horário
-              </Link>
+                Falar pelo WhatsApp
+              </a>
 
               <a
                 className="portfolio-text-link"
@@ -387,12 +352,14 @@ export default function HomePage() {
           <div className="portfolio-service-footer">
             <p>Quer saber mais sobre um procedimento?</p>
 
-            <Link
+            <a
               className="portfolio-text-link"
-              href={rotaAgendamento()}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Agendar um horário
-            </Link>
+              Falar com a Ivani
+            </a>
           </div>
         </section>
 
@@ -440,12 +407,14 @@ export default function HomePage() {
               Ivani Mello
             </span>
 
-            <Link
+            <a
               className="portfolio-text-link"
-              href={rotaAgendamento()}
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               Vamos conversar sobre o seu próximo visual
-            </Link>
+            </a>
           </div>
         </section>
 
@@ -465,21 +434,14 @@ export default function HomePage() {
             </h2>
 
             <p>
-              Faça seu agendamento pelo nosso sistema ou entre
-              em contato para tirar dúvidas.
+              Entre em contato com a Ivani para consultar horários,
+              serviços e tirar suas dúvidas.
             </p>
 
             <div className="portfolio-contact-actions">
-              <Link
-                className="portfolio-button"
-                href={rotaAgendamento()}
-              >
-                Agendar pelo sistema
-              </Link>
-
               <a
                 className="portfolio-button portfolio-whatsapp-button"
-                href="https://wa.me/5554996619663?text=Ol%C3%A1%2C%20Ivani!%20Gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os."
+                href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
               >

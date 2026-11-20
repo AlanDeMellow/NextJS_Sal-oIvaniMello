@@ -12,10 +12,13 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [erro, setErro] = useState("");
+  const [carregando, setCarregando] = useState(false);
 
-  async function submitForm(event: any) {
+  async function submitForm(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
     setErro("");
+    setCarregando(true);
 
     try {
       const resp = await fetch("http://localhost:3000/api/auth/login", {
@@ -36,17 +39,23 @@ export default function LoginPage() {
         return;
       }
 
+      if (dados.role !== "ADMIN") {
+        setErro("Usuário sem permissão de administrador.");
+        return;
+      }
+
       saveToken(dados.access_token);
       saveRole(dados.role);
 
-      if (dados.role === "ADMIN") {
-        router.replace("/admin");
-      } else {
-        router.replace("/cliente");
-      }
+      router.replace("/admin");
     } catch (error) {
       console.error(error);
-      setErro("Não foi possível conectar com o backend.");
+
+      setErro(
+        "Não foi possível conectar com o backend."
+      );
+    } finally {
+      setCarregando(false);
     }
   }
 
@@ -67,7 +76,8 @@ export default function LoginPage() {
           backgroundColor: "#ffffff",
           borderRadius: "24px",
           border: "1px solid #ead7df",
-          boxShadow: "0 15px 40px rgba(143, 83, 107, 0.08)",
+          boxShadow:
+            "0 15px 40px rgba(143, 83, 107, 0.08)",
         }}
       >
         <div className="text-center mb-5">
@@ -101,7 +111,7 @@ export default function LoginPage() {
             backgroundColor: "#8f536b",
             marginBottom: "20px",
           }}
-        ></div>
+        />
 
         <h1
           className="mb-2"
@@ -121,11 +131,16 @@ export default function LoginPage() {
             color: "#7a6c72",
           }}
         >
-          Acesse sua área administrativa.
+          Acesso exclusivo à área administrativa.
         </p>
 
         {erro && (
-          <div className="alert alert-danger">
+          <div
+            className="alert alert-danger"
+            style={{
+              borderRadius: "12px",
+            }}
+          >
             {erro}
           </div>
         )}
@@ -152,7 +167,9 @@ export default function LoginPage() {
                 className="form-control"
                 placeholder="seu@email.com"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
                 style={{
                   borderColor: "#e5ccd6",
                   padding: "14px",
@@ -179,11 +196,17 @@ export default function LoginPage() {
               </span>
 
               <input
-                type={showPassword ? "text" : "password"}
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
                 className="form-control"
                 placeholder="Sua senha"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
                 style={{
                   borderColor: "#e5ccd6",
                   padding: "14px",
@@ -194,7 +217,11 @@ export default function LoginPage() {
               <button
                 type="button"
                 className="btn bg-white"
-                onClick={() => setShowPassword(!showPassword)}
+                onClick={() =>
+                  setShowPassword(
+                    !showPassword
+                  )
+                }
                 style={{
                   border: "1px solid #e5ccd6",
                   color: "#8f536b",
@@ -213,15 +240,22 @@ export default function LoginPage() {
 
           <button
             type="submit"
+            disabled={carregando}
             className="btn w-100 py-3 mt-2"
             style={{
               backgroundColor: "#8f536b",
               color: "#fff",
               borderRadius: "14px",
               fontSize: "1rem",
+              border: "none",
+              opacity: carregando
+                ? 0.7
+                : 1,
             }}
           >
-            Entrar
+            {carregando
+              ? "Entrando..."
+              : "Entrar"}
           </button>
         </form>
 

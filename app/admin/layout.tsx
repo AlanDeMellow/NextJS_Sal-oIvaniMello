@@ -22,7 +22,7 @@ export default function AdminLayout({
     }
 
     if (!isAdmin()) {
-      router.replace("/agendar");
+      router.replace("/login");
       return;
     }
 
